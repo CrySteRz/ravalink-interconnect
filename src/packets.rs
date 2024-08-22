@@ -1,12 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
-pub struct JobExpired {
-    pub guild_id: String,
-    pub job_id: String,
-}
-
-#[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Track {
     pub id: String,
     pub url: String,
