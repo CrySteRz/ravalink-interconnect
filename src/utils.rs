@@ -4,11 +4,12 @@ use rand::seq::SliceRandom;
 use crate::{packets::{Playlist, Queue, Track}, protocol::{{JobRequest, JobRequestType}}};
 
 impl JobRequest {
-    pub fn new(job_id: String, worker_id: String, guild_id: String, command: JobRequestType, timestamp: u64) -> Self {
+    pub fn new(job_id: String,worker_id: String, guild_id: String, command: JobRequestType,voice_channel_id: Option<String>, timestamp: u64) -> Self {
         JobRequest {
             job_id,
             worker_id,
             guild_id,
+            voice_channel_id,
             command,
             timestamp,
         }

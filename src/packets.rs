@@ -11,7 +11,6 @@ pub struct Track {
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Analytics {
-    pub worker_id: String,
     pub cpu_usage: u8,
     pub memory_usage: u8,
     pub jobs_running: u32,
