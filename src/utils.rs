@@ -1,20 +1,7 @@
 use url::Url;
 use sha2::{Digest, Sha256};
 use rand::seq::SliceRandom;
-use crate::{packets::{Playlist, Queue, Track}, protocol::{{JobRequest, JobRequestType}}};
-
-impl JobRequest {
-    pub fn new(job_id: String,worker_id: String, guild_id: String, command: JobRequestType,voice_channel_id: Option<String>, timestamp: u64) -> Self {
-        JobRequest {
-            job_id,
-            worker_id,
-            guild_id,
-            voice_channel_id,
-            command,
-            timestamp,
-        }
-    }
-}
+use crate::packets::{Playlist, Queue, Track};
 
 impl Track {
     pub fn new(url: String, title: String, author: String, duration: u64) -> Self {

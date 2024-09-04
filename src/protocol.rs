@@ -1,10 +1,9 @@
 use serde_derive::{Deserialize, Serialize};
-use crate::packets::Track;
+use crate::packets::{Track, Pong};
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
 #[serde(tag = "type")]
-pub enum JobRequestType {
-    Ping,
+pub enum Command {
     Search { query: String },
     Play { url: String },
     Stop,
@@ -23,17 +22,25 @@ pub enum JobRequestType {
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
-pub struct JobRequest {
+pub struct Request {
     pub job_id: String,
     pub worker_id: String,
     pub guild_id: String,
     pub voice_channel_id: Option<String>,
-    pub command: JobRequestType,
+    pub command: Command,
     pub timestamp: u64,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
-pub enum JobEventType {
+pub struct Event {
+    pub event_type: EventType,
+    pub job_id: String,
+    pub guild_id: String,
+    pub timestamp: u64,
+}
+
+#[derive(Deserialize, Debug, Serialize, Clone)]
+pub enum EventType {
     ChannelLeave,
     ChannelMove,
     AudioEnd,
@@ -43,16 +50,7 @@ pub enum JobEventType {
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
-pub struct JobEvent {
-    pub event_type: JobEventType,
-    pub job_id: String,
-    pub guild_id: String,
-    pub details: Option<String>,
-    pub timestamp: u64,
-}
-
-#[derive(Deserialize, Debug, Serialize, Clone)]
-pub enum JobResponseType {
+pub enum ResponseType {
     Success,
     Failure { reason: String },
     SearchResults { tracks: Vec<Track> },
@@ -64,16 +62,18 @@ pub enum JobResponseType {
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
-pub struct JobResponse {
+pub struct Response {
     pub job_id: String,
     pub guild_id: String,
-    pub response_type: JobResponseType,
+    pub response_type: ResponseType,
     pub timestamp: u64,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub enum Message {
-    JobRequest(JobRequest),
-    JobEvent(JobEvent),
-    JobResponse(JobResponse),
+    Ping, 
+    Pong(Pong),
+    Request(Request),
+    Event(Event),
+    Response(Response),
 }

@@ -16,6 +16,11 @@ pub struct Analytics {
     pub jobs_running: u32,
     pub disk_usage: u8,
 }
+#[derive(Deserialize, Debug, Serialize, Clone)]
+pub struct Pong {
+    pub worker_id: String,
+    pub timestamp: u64,
+}
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Queue {
