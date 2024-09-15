@@ -4,6 +4,7 @@ use crate::packets::{Track, Pong};
 #[derive(Deserialize, Debug, Serialize, Clone)]
 #[serde(tag = "type")]
 pub enum Command {
+    Connect,
     Search { query: String },
     Play { url: String },
     Stop,
