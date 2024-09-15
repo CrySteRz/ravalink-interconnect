@@ -24,7 +24,6 @@ pub enum Command {
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Request {
     pub job_id: String,
-    pub worker_id: String,
     pub guild_id: String,
     pub voice_channel_id: Option<String>,
     pub command: Command,
