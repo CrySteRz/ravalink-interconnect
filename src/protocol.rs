@@ -18,7 +18,7 @@ pub enum Command {
     ClearPlaylist { playlist_id: String },
     ShuffleQueue,
     Skip,
-    Loop { enabled: bool },
+    Loop,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
