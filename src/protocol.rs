@@ -26,7 +26,7 @@ pub enum Command {
 pub struct Request {
     pub job_id: String,
     pub guild_id: String,
-    pub voice_channel_id: Option<String>,
+    pub voice_channel_id: String,
     pub command: Command,
     pub timestamp: u64,
 }
