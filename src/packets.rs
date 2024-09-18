@@ -1,3 +1,5 @@
+use std::num::NonZero;
+
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
@@ -24,13 +26,13 @@ pub struct Pong {
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Queue {
-    pub guild_id: String,
+    pub guild_id: NonZero<u64>,
     pub tracks: Vec<Track>,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Playlist {
-    pub guild_id: String,
+    pub guild_id: NonZero<u64>,
     pub playlist_id: String,
     pub name: String,
     pub tracks: Vec<Track>,

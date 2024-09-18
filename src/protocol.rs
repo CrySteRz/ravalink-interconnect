@@ -62,7 +62,7 @@ pub enum ResponseType {
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Response {
     pub job_id: String,
-    pub guild_id: String,
+    pub guild_id: NonZero<u64>,
     pub response_type: ResponseType,
     pub timestamp: u64,
 }
