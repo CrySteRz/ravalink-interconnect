@@ -1,3 +1,4 @@
+use std::num::NonZero;
 use serde_derive::{Deserialize, Serialize};
 use crate::packets::{Track, Pong};
 
@@ -25,8 +26,8 @@ pub enum Command {
 #[derive(Deserialize, Debug, Serialize, Clone)]
 pub struct Request {
     pub job_id: String,
-    pub guild_id: String,
-    pub voice_channel_id: String,
+    pub guild_id: NonZero<u64>,
+    pub voice_channel_id: Option<NonZero<u64>>,
     pub command: Command,
     pub timestamp: u64,
 }
@@ -35,7 +36,7 @@ pub struct Request {
 pub struct Event {
     pub event_type: EventType,
     pub job_id: String,
-    pub guild_id: String,
+    pub guild_id: NonZero<u64>,
     pub timestamp: u64,
 }
 
@@ -54,11 +55,8 @@ pub enum ResponseType {
     Success,
     Failure { reason: String },
     SearchResults { tracks: Vec<Track> },
-    PlayStarted,
-    VolumeAdjusted,
     Playlists { playlists: Vec<String> },
     PlaylistLoaded { tracks: Vec<Track> },
-    PlaylistCleared,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
